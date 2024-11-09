@@ -4,16 +4,16 @@ public class Usuario{
   protected String nombres;
   protected String apellidos;
   protected String usuario;
-  protected String contrasena:
+  protected String contrasenia:
   protected String correo;
 
-  public Usuario(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasena, String correo){
+  public Usuario(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo){
     this.codigoUnico = codigoUnico;
     this.cedula = cedula;
     this.nombres = nombres;
     this.apellidos = apellidos;
     this.usuario = usuario;
-    this.contrasena = contrasena;
+    this.contrasenia = contrasenia;
     this.correo = correo;
   }
 
@@ -46,7 +46,7 @@ public class Usuario{
     this.usuario = usuario;
   }
   
-  public void setContrasena(String contrasena){
+  public void setContrasenia(String contrasenia){
     this.contrasena = contrasena;
   }
 
@@ -74,7 +74,7 @@ public class Usuario{
     return usuario;
   }
   
-  public String getContrasena(){
+  public String getContrasenia(){
     return contrasena;
   }
 

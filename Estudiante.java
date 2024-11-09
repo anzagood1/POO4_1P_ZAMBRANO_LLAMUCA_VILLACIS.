@@ -4,8 +4,8 @@ public class Estudiante extends Usuario{
 
   public Estudiante(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String costrasenia, String correo, int numMatricula, String carrera){
     super(codigoUnico, cedula,nombres, apellidos, usuario, contrasenia, correo)
-    this.setnumMatricula(numMatricula);
-    this.setCarrera(carrera);
+    this.numMatricula= numMatricula;
+    this.carrera= carrera;
   }
 
   public void gestionarReserva(){

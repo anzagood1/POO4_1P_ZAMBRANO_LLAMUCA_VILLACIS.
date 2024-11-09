@@ -1,17 +1,17 @@
 public class Usuario{
   protected String codigoUnico;
   protected String cedula;
-  protected String nombre;
-  protected String apellido;
+  protected String nombres;
+  protected String apellidos;
   protected String usuario;
   protected String contrasena:
   protected String correo;
 
-  public Usuario(String codigoUnico, String cedula, String nombre, String apellido, String usuario, String contrasena, String correo){
+  public Usuario(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasena, String correo){
     this.codigoUnico = codigoUnico;
     this.cedula = cedula;
-    this.nombre = nombre;
-    this.apellido = apellido;
+    this.nombres = nombres;
+    this.apellidos = apellidos;
     this.usuario = usuario;
     this.contrasena = contrasena;
     this.correo = correo;
@@ -34,12 +34,12 @@ public class Usuario{
     this.cedula = cedula;
   }
 
-  public void setNombre(String nombre){
-    this.nombre = nombre;
+  public void setNombres(String nombres){
+    this.nombres = nombres;
   }
 
-  public void setApellido(String apellido){
-    this.apellido = apellido;
+  public void setApellidos(String apellidos){
+    this.apellidos = apellidos;
   }
 
   public void setUsuario(String usuario){
@@ -62,12 +62,12 @@ public class Usuario{
     return cedula;
   }
 
-  public String getNombre(){
-    return nombre;
+  public String getNombres(){
+    return nombres;
   }
 
-  public String getApellido(){
-    return apellido;
+  public String getApellidos(){
+    return apellidos;
   }
 
   public String getUsuario(){

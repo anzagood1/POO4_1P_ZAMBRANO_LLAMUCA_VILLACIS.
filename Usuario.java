@@ -1,4 +1,4 @@
-public class Usuario{
+public abstract class Usuario{
   protected String codigoUnico;
   protected String cedula;
   protected String nombres;
@@ -17,13 +17,14 @@ public class Usuario{
     this.correo = correo;
   }
 
-  public void consultarReserva(){
-  }
+  public abstract void consultarReserva();
 
-  public void gestionarReserva(){
-  }
+  public abstract void gestionarReserva();
 
   public void enviarNotificacion(){
+  }
+
+  public void enviarNotificacion(String materia){
   }
 
   public void setCodigoUnico(String codigoUnico){

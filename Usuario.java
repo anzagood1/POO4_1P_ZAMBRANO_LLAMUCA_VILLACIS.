@@ -4,7 +4,7 @@ public abstract class Usuario{
   protected String nombres;
   protected String apellidos;
   protected String usuario;
-  protected String contrasenia:
+  protected String contrasenia;
   protected String correo;
 
   public Usuario(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo){
@@ -82,7 +82,7 @@ public abstract class Usuario{
   public String getCorreo(){
     return correo;
   }
-
+}
 
 
 

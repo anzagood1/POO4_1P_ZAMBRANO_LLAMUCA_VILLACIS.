@@ -3,6 +3,7 @@ package com.example;
 import java.sql.Date;
 
 public class Reserva {
+    private int codigoReserva;
     private String codigoUnicoEspacio;
     private Date fechaReserva;
     private TipoEspacio tipoDeEspacio;
@@ -22,6 +23,10 @@ public class Reserva {
     }
 
     //setters
+    public void setCodigoReserva(int codigoReserva){
+        this.codigoReserva= codigoReserva;
+    }
+    
     public void setCodigoUnicoEspacio(String codigoUnicoEspacio){
         this.codigoUnicoEspacio = codigoUnicoEspacio;
     }
@@ -42,12 +47,16 @@ public class Reserva {
         this.motivoDeLaReserva = motivoDeLaReserva;
     }
 
-   /*  public void setUsuario(Usuario usuario){
+   public void setUsuario(Usuario usuario){
         this.usuario = usuario;
     }
-    */
+    
 
     //getters
+    public int getCodigoReserva(){
+        return this.codigoReserva;
+    }
+    
     public String getCodigoUnicoEspacio(){
         return this.codigoUnicoEspacio;
     }
@@ -67,9 +76,9 @@ public class Reserva {
     public String getMotivoReserva(){
         return this.motivoDeLaReserva;
     }
-    /* 
+
     public Usuario getUsuario(){
         return this.usuario;
     }
-    */
+    
 }

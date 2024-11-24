@@ -2,7 +2,7 @@ public class Estudiante extends Usuario{
   private int numMatricula;
   private String carrera;
 
-  public Estudiante(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String costrasenia, String correo, int numMatricula, String carrera){
+  public Estudiante(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo, int numMatricula, String carrera){
     super(codigoUnico, cedula,nombres, apellidos, usuario, contrasenia, correo)
     this.numMatricula= numMatricula;
     this.carrera= carrera;

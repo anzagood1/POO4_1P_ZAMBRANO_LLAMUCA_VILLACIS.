@@ -1,37 +1,38 @@
 package com.example;
-
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Reserva {
     private int codigoReserva;
     private String codigoUnicoEspacio;
-    private Date fechaReserva;
+    private LocalDate fechaReserva;
     private TipoEspacio tipoDeEspacio;
     private EstadoReserva estadoDeLaReserva;
     private String motivoDeLaReserva;
-    public Usuario usuario;
+    public String codigoUsuario;
+    public String cedulaUsuario;
     public static int numeroReservas;
 
-    public Reserva(String codigoUnicoEspacio, Date fechaReserva, TipoEspacio tipoDeEspacio, EstadoReserva estadoDeLaReserva, String motivoDeLaReserva, Usuario usuario){
+    public Reserva(int codigoReserva, String codigoUnicoEspacio, LocalDate fechaReserva, TipoEspacio tipoDeEspacio, EstadoReserva estadoDeLaReserva, String motivoDeLaReserva, String codigoUsuario, String cedulaUsuario){
+        this.codigoReserva = codigoReserva;
         this.codigoUnicoEspacio = codigoUnicoEspacio;
         this.fechaReserva = fechaReserva;
         this.tipoDeEspacio = tipoDeEspacio;
         this.estadoDeLaReserva = estadoDeLaReserva;
         this.motivoDeLaReserva = motivoDeLaReserva;
-        this.usuario = usuario;
+        this.codigoUsuario = codigoUsuario;
+        this.cedulaUsuario = cedulaUsuario;
         numeroReservas++;
     }
 
-    //setters
     public void setCodigoReserva(int codigoReserva){
-        this.codigoReserva= codigoReserva;
+        this.codigoReserva = codigoReserva;
     }
-    
+
     public void setCodigoUnicoEspacio(String codigoUnicoEspacio){
         this.codigoUnicoEspacio = codigoUnicoEspacio;
     }
 
-    public void setFechaReserva(Date fechaReserva){
+    public void setFechaReserva(LocalDate fechaReserva){
         this.fechaReserva = fechaReserva;
     }
 
@@ -47,21 +48,23 @@ public class Reserva {
         this.motivoDeLaReserva = motivoDeLaReserva;
     }
 
-   public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
+    public void setCodigoUsuario(String codigoUsuario){
+        this.codigoUsuario = codigoUsuario;
     }
-    
 
-    //getters
+    public void setCedulaUsuario(String cedulaUsuario){
+        this.cedulaUsuario = cedulaUsuario;
+    }
+
     public int getCodigoReserva(){
         return this.codigoReserva;
     }
-    
+
     public String getCodigoUnicoEspacio(){
         return this.codigoUnicoEspacio;
     }
 
-    public Date getFechaReserva(){
+    public LocalDate getFechaReserva(){
         return this.fechaReserva;
     }
 
@@ -76,9 +79,27 @@ public class Reserva {
     public String getMotivoReserva(){
         return this.motivoDeLaReserva;
     }
-
-    public Usuario getUsuario(){
-        return this.usuario;
-    }
     
+    public String getCodigoUsuario(){
+        return this.codigoUsuario;
+    }
+
+    public String getCedulaUsuario(){
+        return this.cedulaUsuario;
+    }
+
+    public static int generarCodigoReserva(){
+        int i = (Sistema.reservas.size()) - 1;
+        Reserva ultimo = Sistema.reservas.get(i);
+        int codUnico = (ultimo.getCodigoReserva()) + 1;
+        return codUnico;
+    }
+
+    public String toString(){
+        return this.codigoReserva + " | " + this.codigoUsuario 
+        + " | " + this.cedulaUsuario + " | " + this.fechaReserva
+        + this.codigoUnicoEspacio + " | " + this.tipoDeEspacio + " | " 
+        + this.estadoDeLaReserva + " | " + this.motivoDeLaReserva; 
+    }
+
 }

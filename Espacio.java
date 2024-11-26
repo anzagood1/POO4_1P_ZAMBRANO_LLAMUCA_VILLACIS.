@@ -54,4 +54,10 @@ public class Espacio {
     public EstadoEspacio getEstado(){
         return estado;
     }
+
+    public String toString(){
+        return this.codigoUnico + " | " + this.tipoDeEspacio
+        + " | " + this.nombre + " | " + this.capacidad + " | " + 
+        this.estado;
+    }
 }

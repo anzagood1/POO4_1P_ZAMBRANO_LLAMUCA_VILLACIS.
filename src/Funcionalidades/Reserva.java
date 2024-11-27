@@ -1,8 +1,10 @@
 package src.Funcionalidades;
 
 import java.time.LocalDate;
-import ENUMS.TipoEspacio;
-import ENUMS.EstadoReserva;
+import src.ENUMS.TipoEspacio;
+import src.ENUMS.EstadoReserva;
+import src.Principal.Sistema;
+
 
 public class Reserva {
     private int codigoReserva;

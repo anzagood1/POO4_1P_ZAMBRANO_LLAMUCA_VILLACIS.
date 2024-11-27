@@ -42,10 +42,9 @@ public class Profesor extends Usuario{
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
             System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
-            Espacio espacio;
-            for (Espacio espa: Sistema.espacios){
+
+            for (Espacio espacio: Sistema.espacios){
               if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
-                espacio=espa;
                 System.out.println("Nombre de Espacio"+espacio.getNombre());
                 System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
               }
@@ -53,10 +52,8 @@ public class Profesor extends Usuario{
             System.out.println("Nombre de Espacio"+espacio.getNombre());
             System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
               
-            Usuario usuario;
-            for (Usuario usu: usuarios){
+            for (Usuario usuario: usuarios){
                 if (usu.getCodigoUnico==this.getCodigoUnico){
-                    usuario=usu;
                     System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
                 }
             }

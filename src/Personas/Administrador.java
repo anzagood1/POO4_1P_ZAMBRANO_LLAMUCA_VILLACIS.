@@ -1,4 +1,6 @@
-package com.example;
+package src.Personas;
+
+import Funcionalidades;
 
 public class Administrador extends Usuario{
     Cargo cargoAdmin;

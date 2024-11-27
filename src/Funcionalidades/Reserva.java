@@ -15,6 +15,17 @@ public class Reserva {
     public String cedulaUsuario;
     public static int numeroReservas;
 
+    /**
+     * Método constructor de la clase Reserva.
+     * @param codigoReserva codigo de la reserva.
+     * @param codigoUnicoEspacio codigo unico del espacio de la reserva.
+     * @param fechaReserva fecha de la reserva.
+     * @param tipoDeEspacio tipo de espacio del espacio de la reserva.
+     * @param estadoDeLaReserva estado de la reserva.
+     * @param motivoDeLaReserva motivo de la reserva.
+     * @param codigoUsuario codigo del usuario que realiza la reserva.
+     * @param cedulaUsuario cedula del usuario que realiza la reserva.
+     */
     public Reserva(int codigoReserva, String codigoUnicoEspacio, LocalDate fechaReserva, TipoEspacio tipoDeEspacio, EstadoReserva estadoDeLaReserva, String motivoDeLaReserva, String codigoUsuario, String cedulaUsuario){
         this.codigoReserva = codigoReserva;
         this.codigoUnicoEspacio = codigoUnicoEspacio;
@@ -27,6 +38,7 @@ public class Reserva {
         numeroReservas++;
     }
 
+    //setters
     public void setCodigoReserva(int codigoReserva){
         this.codigoReserva = codigoReserva;
     }
@@ -59,6 +71,7 @@ public class Reserva {
         this.cedulaUsuario = cedulaUsuario;
     }
 
+    //getters
     public int getCodigoReserva(){
         return this.codigoReserva;
     }
@@ -91,6 +104,10 @@ public class Reserva {
         return this.cedulaUsuario;
     }
 
+    /**
+     * Método que genera el código de las nuevas reservas registradas.
+     * @return retorna el un int, el código único de la nueva reserva.
+     */
     public static int generarCodigoReserva(){
         int i = (Sistema.reservas.size()) - 1;
         if(i<0){

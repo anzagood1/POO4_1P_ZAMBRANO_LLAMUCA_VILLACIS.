@@ -1,4 +1,4 @@
-package com.example;
+package src.Funcionalidades;
 import java.time.LocalDate;
 
 public class Reserva {

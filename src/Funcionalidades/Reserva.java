@@ -1,5 +1,8 @@
 package src.Funcionalidades;
+
 import java.time.LocalDate;
+import ENUMS.TipoEspacio;
+import ENUMS.EstadoReserva;
 
 public class Reserva {
     private int codigoReserva;

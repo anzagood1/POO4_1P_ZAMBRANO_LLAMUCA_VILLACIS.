@@ -36,22 +36,29 @@ public class Profesor extends Usuario{
      * @param fecha la fecha de la reserva a consultar.
      * @return no retorna valores, imprime en consola.
      */
-    public void consultarReserva(Date fecha){
+    public void consultarReserva(LocalDate fecha){
         for (Reserva reserva: reservas){
-          if (reserva.getFechaReserva()==fecha && reserva.getUsuario().getCodigoUnico()==this.getCodigoUnico()){
+          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
             Espacio espacio;
             for (Espacio espa: espacios){
               if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
                 espacio=espa;
               }
             }
-    
+            Usuario usuario;
+            for (Usuario usu: usuarios){
+                if (usu.getCodigoUnico==this.getCodigoUnico){
+                    usuario=usu;
+                }
+            }
+
+              
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
             System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
             System.out.println("Nombre de Espacio"+espacio.getNombre());
             System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
-            System.out.println("Nombres y Apellidos: "+reserva.getUsuario().getNombres()+reserva.getUsuario().getApellidos());
+            System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
             System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
           }
         }

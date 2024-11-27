@@ -52,7 +52,7 @@ public class Profesor extends Usuario{
     }
 
     /**
-     * Este método permite realizar reservas a la subclase profesor.
+     * Este método permite al Profesor realizar una reserva de un espacio.
      */
     public void gestionarReserva(){
         super.gestionarReserva();

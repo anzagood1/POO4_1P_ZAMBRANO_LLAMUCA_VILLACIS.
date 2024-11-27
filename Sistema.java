@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Sistema {
     public static ArrayList<Usuario> usuarios = new ArrayList<>();
@@ -12,23 +13,23 @@ public class Sistema {
         ArrayList<String> ProfesorDatos = manejoArchivos.LeeFichero(nombreArchivoProfesor);
         ArrayList<String> AdministradorDatos = manejoArchivos.LeeFichero(nombreArchivoAdministrador);
         for (String s : UsuarioDatos){
-            String [] datosUser = s.split("|");
+            String [] datosUser = s.split(" | " );
             String codigoUnico = datosUser[0];
             String cedula = datosUser[1];
             String nombres = datosUser[2];
             String apellidos = datosUser[3];
-            String usuario = datosUser[4];
+            String usuario = datosUser[4];                                    
             String contrasenia = datosUser[5];
             String correo = datosUser[6];
             String tipo = datosUser[7];
             switch (tipo){
                 case "P":
                 for (String c : ProfesorDatos){
-                    String [] datosPr = c.split("|");
+                    String [] datosPr = c.split(" | ");
                     if(datosPr[0] == codigoUnico){
                         String facultad = datosPr[4];
                         ArrayList<String> materias = new ArrayList<>();
-                        String [] materiasArreglo = datosPr[5].split(",");
+                        String [] materiasArreglo = datosPr[5].split(", ");
                         for (String materia : materiasArreglo){
                             materias.add(materia);
                         }
@@ -38,7 +39,7 @@ public class Sistema {
                 break;
                 case "E":
                 for (String d : EstudianteDatos){
-                    String [] datosEs = d.split("|");
+                    String [] datosEs = d.split(" | ");
                     if(datosEs[0] == codigoUnico){
                         int numMatricula = Integer.parseInt(datosEs[4]);
                         String carrera = datosEs[5];
@@ -48,13 +49,13 @@ public class Sistema {
                 break;
                 case "A":
                 for (String x : AdministradorDatos){
-                    String [] datosAd = x.split("|");
+                    String [] datosAd = x.split(" | ");
                     if(datosAd[0] == codigoUnico){
                         Cargo cargoAdmin = Cargo.valueOf(datosAd[5].toUpperCase());
-                       // Cargo cargoAdmin = (Cargo) datosAd[4];
                         Sistema.usuarios.add(new Administrador(codigoUnico, cedula, nombres, apellidos, usuario, contrasenia, correo, cargoAdmin));
                     }
                 }
+                break;
             }
         }
     }
@@ -62,7 +63,7 @@ public class Sistema {
     public static void cargarEspacios(String nombreArchivoEspacios){
        ArrayList<String> EspacioDatos = manejoArchivos.LeeFichero(nombreArchivoEspacios);
        for (String z : EspacioDatos){
-        String [] datosEspacio = z.split("|");
+        String [] datosEspacio = z.split(" | ");
         String codigoUnico = datosEspacio[0];
         TipoEspacio tipoDeEspacio = TipoEspacio.valueOf(datosEspacio[1].toUpperCase());
         String nombre = datosEspacio[2];
@@ -72,8 +73,20 @@ public class Sistema {
        }
     }
 
-    public static void cargarReservas(ArrayList<Reserva> reservas){
-        Sistema.reservas = reservas;
+    public static void cargarReservas(String nombreArchivoReservas){
+        ArrayList<String> ReservaDatos = manejoArchivos.LeeFichero(nombreArchivoReservas);
+        for(String r : ReservaDatos){
+            String [] datosEspacio = r.split(" | ");
+            int codigoReserva = Integer.parseInt(datosEspacio[0]);
+            String codigoUsuario = datosEspacio[1];
+            String cedulaUsuario = datosEspacio[2];
+            LocalDate fechaReserva = LocalDate.parse(datosEspacio[3]);
+            String codigoUnicoEspacio = datosEspacio[4];
+            TipoEspacio tipoDeEspacio = TipoEspacio.valueOf(datosEspacio[5].toUpperCase());
+            EstadoReserva estadoDeLaReserva = EstadoReserva.valueOf(datosEspacio[6].toUpperCase());
+            String motivoDeLaReserva = datosEspacio[7];
+            reservas.add(new Reserva(codigoReserva,codigoUnicoEspacio,fechaReserva,tipoDeEspacio,estadoDeLaReserva,motivoDeLaReserva,codigoUsuario,cedulaUsuario));
+        }
     }
 
     public static Usuario iniciarSesion(){
@@ -95,34 +108,48 @@ public class Sistema {
         Scanner sc = new Scanner(System.in);
             if (usuario instanceof Estudiante){
                 Estudiante e = (Estudiante) usuario;
-                System.out.println("1. Reservar");
-                System.out.println("2. Consultar Reserva");
-                String opcion = sc.nextLine();
-                if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
+                String opcion;
+                do {
+                    System.out.println("1. Reservar");
+                    System.out.println("2. Consultar Reserva");
+                    System.out.println("3. Cerrar sesion");
+                    opcion = sc.nextLine();
+                    if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
                     e.gestionarReserva();
-                }else{
+                    }else{
                     e.consultarReserva();
-                }
+                    }
+                } while (opcion != "Cerrar sesion" || Integer.parseInt(opcion) != 3);
+                
             }else if(usuario instanceof Profesor){
                 Profesor p = (Profesor) usuario;
-                System.out.println("1. Reservar");
-                System.out.println("2. Consultar Reserva");
-                String opcion = sc.nextLine();
-                if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
+                String opcion;
+                do {
+                    System.out.println("1. Reservar");
+                    System.out.println("2. Consultar Reserva");
+                    System.out.println("3. Cerrar sesion");
+                    opcion = sc.nextLine();
+                    if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
                     p.gestionarReserva();
-                }else{
+                    }else{
                     p.consultarReserva();
-                }
+                    }
+                } while (opcion != "Cerrar sesion" || Integer.parseInt(opcion) != 3);
+                
             }else{
                 Administrador a = (Administrador) usuario;
-                System.out.println("1. Reservar");
-                System.out.println("2. Consultar Reserva");
-                String opcion = sc.nextLine();
-                if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
-                    a.gestionarReserva();
-                }else{
-                    a.consultarReserva();
-                }
+                String opcion;
+                do {
+                    System.out.println("1. Gestionar reserva");
+                    System.out.println("2. Consultar Reserva");
+                    System.out.println("3. Cerrar sesion");
+                    opcion = sc.nextLine();
+                    if (opcion.equalsIgnoreCase("Gestionar reserva") || Integer.parseInt(opcion) == 1){
+                        a.gestionarReserva();
+                    }else{
+                        a.consultarReserva();
+                    }
+                } while (opcion != "Cerrar sesion" || Integer.parseInt(opcion) != 3);
             }
             sc.close();
         }
@@ -130,6 +157,7 @@ public class Sistema {
         public static void main(String[] args){
            Sistema.cargarUsuarios("usuario.txt", "estudiantes.txt", "profesores.txt", "administradores.txt");
            Sistema.cargarEspacios("espacios.txt");
+           Sistema.cargarReservas("reservas.txt");
         }
     }
 

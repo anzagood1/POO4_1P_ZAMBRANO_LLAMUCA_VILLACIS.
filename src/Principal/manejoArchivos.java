@@ -75,6 +75,17 @@ public class manejoArchivos {
             }
         }
     }
+    
+public static void borrarArchivo(String archivo){
 
+        try {
+            // Usa FileWriter con el segundo argumento en "false" para sobrescribir
+            FileWriter escritor = new FileWriter(archivo, false);
+            escritor.write(""); // Escribir contenido vacío
+            escritor.close(); // Cerrar el escritor
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -124,7 +124,7 @@ public class Sistema {
                     }else{
                     e.consultarReserva();
                     }
-                } while (opcion != "Cerrar sesion" || Integer.parseInt(opcion) != 3);
+                } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
                 
             }else if(usuario instanceof Profesor){
                 Profesor p = (Profesor) usuario;
@@ -139,7 +139,7 @@ public class Sistema {
                     }else{
                     p.consultarReserva();
                     }
-                } while (opcion != "Cerrar sesion" || Integer.parseInt(opcion) != 3);
+                } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
                 
             }else{
                 Administrador a = (Administrador) usuario;
@@ -154,7 +154,7 @@ public class Sistema {
                     }else{
                         a.consultarReserva();
                     }
-                } while (opcion != "Cerrar sesion" || Integer.parseInt(opcion) != 3);
+                } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
             }
             sc.close();
         }

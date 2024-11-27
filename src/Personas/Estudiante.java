@@ -75,23 +75,28 @@ public class Estudiante extends Usuario{
    */
   public void consultarReserva(){
     for (Reserva reserva: reservas){
-      if (reserva.getFechaReserva()==fecha && reserva.getUsuario().getCodigoUnico()==this.getCodigoUnico()){
-        Espacio espacio;
-        for (Espacio espa: espacios){
-          if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
-            espacio=espa;
+          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
+            System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
+            System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
+            System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
+
+            for (Espacio espacio: Sistema.espacios){
+              if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
+                System.out.println("Nombre de Espacio"+espacio.getNombre());
+                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
+              }
+            }
+            System.out.println("Nombre de Espacio"+espacio.getNombre());
+            System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
+              
+            for (Usuario usuario: usuarios){
+                if (usu.getCodigoUnico==this.getCodigoUnico){
+                    System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
+                }
+            }
+            System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
           }
         }
-
-        System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
-        System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
-        System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
-        System.out.println("Nombre de Espacio"+espacio.getNombre());
-        System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
-        System.out.println("Nombres y Apellidos: "+reserva.getUsuario().getNombres()+reserva.getUsuario().getApellidos());
-        System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
-      }
-    }
   }
 
   //setters

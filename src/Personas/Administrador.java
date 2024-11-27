@@ -1,6 +1,7 @@
 package src.Personas;
 
 import Funcionalidades;
+import ENUMS.Cargo;
 
 public class Administrador extends Usuario{
     Cargo cargoAdmin;

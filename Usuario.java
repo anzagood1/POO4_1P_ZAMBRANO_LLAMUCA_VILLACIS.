@@ -7,6 +7,17 @@ public abstract class Usuario{
   protected String contrasenia;
   protected String correo;
 
+  /**
+   * Este es el constructor de la clase usuario.
+   * @param codigoUnico es el codigo unico del usuario.
+   * @param cedula es la cedula del usuario.
+   * @param nombres son los nombres del usuario.
+   * @param apellidos son los apellidos del usuario.
+   * @param usuario es el nombre de usuario.
+   * @param contrasenia es la contraseña del usuario.
+   * @param correo es el correo del usuario
+   * @return Este método no retorna nada, es un constructor.
+   **/
   public Usuario(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo){
     this.codigoUnico = codigoUnico;
     this.cedula = cedula;
@@ -21,7 +32,12 @@ public abstract class Usuario{
 
   public abstract void gestionarReserva();
 
-//Metodo enviar mail: Estudiante
+  /**
+   * Este método envia la notificación de una reserva realizada por un estudiantes al correo del administrador.
+   * @param rs la reserva realizada.
+   * @param es el espacio reservado.
+   * @return no retorna valor, impreme en consola.
+   **/
   public void enviarNotificacion(Reserva rs, Espacio es){
     ArrayList<Administrador> admins = new ArrayList<Administrador>();
     for (Usuario u: Sistema.usuarios){
@@ -69,7 +85,14 @@ public abstract class Usuario{
 
     }
 
-//Metodo enviar mail: Profesor
+
+  /**
+   * Este método envia la notificación de una reserva realizada por un profesor al correo del administrador.
+   * @param rs la reserva realizada.
+   * @param es el espacio reservado.
+   * @param materia la materia por la que se reserva el espacio.
+   * @return no retorna valor, impreme en consola.
+   **/
   public void enviarNotificacion(Reserva rs, Espacio es, String materia){
     ArrayList<Administrador> admins = new ArrayList<Administrador>();
     for (Usuario u: Sistema.usuarios){
@@ -113,7 +136,15 @@ public abstract class Usuario{
         System.out.println(e.getMessage());
     }
   }
-//Metodo enviar mail: Administrador
+
+  
+  /**
+   * Este método envia la notificación del estado de la reserva dado por el administrador hacia el usuario que hizo la reserva.
+   * @param rs la reserva realizada.
+   * @param u el usuario que realizó la reserva.
+   * @param EstadoReserva el estado de la reserva dado por el administrador.
+   * @return no retorna valor, impreme en consola.
+   **/
   public void enviarNotificacion(Reserva r, Usuario u, EstadoReserva er){
     String desicion;
     if(er == EstadoReserva.RECHAZADO){

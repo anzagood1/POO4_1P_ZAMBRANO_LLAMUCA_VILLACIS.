@@ -234,7 +234,7 @@ public abstract class Usuario{
   }
   
   public void setContrasenia(String contrasenia){
-    this.contrasena = contrasena;
+    this.contrasenia = contrasenia;
   }
 
   public void setCorreo(String correo){
@@ -263,7 +263,7 @@ public abstract class Usuario{
   }
   
   public String getContrasenia(){
-    return contrasena;
+    return contrasenia;
   }
 
   public String getCorreo(){

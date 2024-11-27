@@ -4,13 +4,32 @@ public class Profesor extends Usuario{
     private facultad facultad;
     private ArrayList<String> materias;
 
+
+    /**
+     * Este método es el constructor de la subclase Porfesor.
+     * @param codigoUnico codigo unico del usuario.
+     * @param cedula cedula del usuario.
+     * @param nombres nombres del usuario.
+     * @param apellidos apellidos del usuario.
+     * @param usuario nombre del usuario.
+     * @param contrasenia contrasenia del usuario.
+     * @param correo correo del usuario.
+     * @param facultad facultad del profesor.
+     * @param materias materias que dicta el profesor.
+     * @return no returna valor, es un constructor.
+     */
     Profesor(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo, facultad facultad, ArrayList<String> materias){
         super(codigoUnico, cedula,nombres, apellidos, usuario, contrasenia, correo);
         this.facultad = facultad;
         this.materias= materias ;
     }
 
-    
+
+    /**
+     * Este método permite consultar una reserva previamente hecha por el profesor.
+     * @param fecha la fecha de la reserva a consultar.
+     * @return no retorna valores, imprime en consola.
+     */
     public void consultarReserva(Date fecha){
         for (Reserva reserva: reservas){
           if (reserva.getFechaReserva()==fecha && reserva.getUsuario().getCodigoUnico()==this.getCodigoUnico()){

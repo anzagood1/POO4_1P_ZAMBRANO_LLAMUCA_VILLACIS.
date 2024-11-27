@@ -1,5 +1,7 @@
 package src.Personas;
 
+import Funcionalidades;
+
 public class Estudiante extends Usuario{
   private int numMatricula;
   private String carrera;

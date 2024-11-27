@@ -39,26 +39,27 @@ public class Profesor extends Usuario{
     public void consultarReserva(LocalDate fecha){
         for (Reserva reserva: reservas){
           if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
+            System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
+            System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
+            System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
             Espacio espacio;
-            for (Espacio espa: espacios){
+            for (Espacio espa: Sistema.espacios){
               if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
                 espacio=espa;
+                System.out.println("Nombre de Espacio"+espacio.getNombre());
+                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
               }
             }
+            System.out.println("Nombre de Espacio"+espacio.getNombre());
+            System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
+              
             Usuario usuario;
             for (Usuario usu: usuarios){
                 if (usu.getCodigoUnico==this.getCodigoUnico){
                     usuario=usu;
+                    System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
                 }
             }
-
-              
-            System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
-            System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
-            System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
-            System.out.println("Nombre de Espacio"+espacio.getNombre());
-            System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
-            System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
             System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
           }
         }

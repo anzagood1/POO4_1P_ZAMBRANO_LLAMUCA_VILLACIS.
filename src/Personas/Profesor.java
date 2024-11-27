@@ -1,11 +1,11 @@
-package com.example.Personas;
+package src.Personas;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import com.example.Funcionalidades.*;
-import com.example.Principal.*;
-import com.example.ENUMS.*;
+import src.Funcionalidades.*;
+import src.Principal.*;
+import src.ENUMS.*;
 
 public class Profesor extends Usuario{
     

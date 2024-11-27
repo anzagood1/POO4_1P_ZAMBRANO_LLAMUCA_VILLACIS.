@@ -145,7 +145,9 @@ public class Sistema {
                     if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
                     e.gestionarReserva();
                     }else{
-                    e.consultarReserva();
+                    System.out.println("¿Cual es la fecha de la reserva que quieres consultar? (AAAA-MM-DD)");
+                    LocalDate fechaReserva = LocalDate.parse(sc.nextLine());
+                    e.consultarReserva(fechaReserva);
                     }
                 } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
                 
@@ -160,7 +162,9 @@ public class Sistema {
                     if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
                     p.gestionarReserva();
                     }else{
-                    p.consultarReserva();
+                    System.out.println("¿Cual es la fecha de la reserva que quieres consultar? (AAAA-MM-DD)");
+                    LocalDate fechaReserva = LocalDate.parse(sc.nextLine());
+                    p.consultarReserva(fechaReserva);
                     }
                 } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
                 

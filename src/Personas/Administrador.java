@@ -47,5 +47,74 @@ public class Administrador extends Usuario{
     /**
      * Método que permite al admnistrador aprobar o rechazar las reservas.
      */
-    public void gestionarReserva(){}
+    @Override
+    public void gestionarReserva(){
+        Scanner sc = new Scanner(System.in);
+        int i = 0;
+        for(Reserva reserva: Sistema.reservas){
+            if(reserva.getEstadoDeLaReserva() == EstadoReserva.PENDIENTE){
+                i++;
+                System.out.println(i + ".| " + reserva);
+            }
+        }
+        System.out.println("Elija el numero de reserva que desea gestionar");
+        int eleccion = sc.nextInt();
+        sc.nextLine();
+        Reserva r = Sistema.reservas.get(eleccion-1);
+        System.out.println(r.getCodigoReserva());
+        System.out.println(r.getFechaReserva());
+        for(Espacio espacio: Sistema.espacios){
+            if(r.getCodigoUnicoEspacio() == espacio.getCodigoUnico()){
+                System.out.println(espacio.getTipoDeEspacio());
+                System.out.println(espacio.getNombre());
+                System.out.println(espacio.getCapacidad());  
+            }
+        }
+        for (Usuario usuario: Sistema.usuarios){
+            if(r.getCodigoUsuario() == usuario.getCodigoUnico()){
+                System.out.println(usuario.getNombres());
+                System.out.println(usuario.getApellidos());
+            }
+        }
+        System.out.println("Desea aprobar o rechazar la reserva? (APROBADO/RECHAZADO)");
+        String estado = sc.nextLine();
+        EstadoReserva tipoEstado = EstadoReserva.valueOf(estado.toUpperCase());
+        if (tipoEstado == EstadoReserva.APROBADO){
+            r.setEstadoDeLaReserva(EstadoReserva.APROBADO);
+            for(Espacio espacio: Sistema.espacios){
+                if(r.getCodigoUnicoEspacio() == espacio.getCodigoUnico()){
+                    espacio.setEstado(EstadoEspacio.RESERVADO);
+                }
+            }
+            ManejoArchivos.borrarArchivo("espacios.txt");
+            for(Espacio espacio: Sistema.espacios){
+                String es = espacio.toString();
+                ManejoArchivos.EscribirArchivo("espacios.txt", es);
+            }
+            for(Usuario usuario: Sistema.usuarios){
+                if(r.getCodigoUsuario() == usuario.getCodigoUnico()){
+                    enviarNotificacion(r,usuario, r.getEstadoDeLaReserva());
+                }
+            }
+        }else if(tipoEstado == EstadoReserva.RECHAZADO){
+            r.setEstadoDeLaReserva(EstadoReserva.RECHAZADO);
+            for(Espacio espacio: Sistema.espacios){
+                if(r.getCodigoUnicoEspacio() == espacio.getCodigoUnico()){
+                    espacio.setEstado(EstadoEspacio.DISPONIBLE);
+                }
+            }
+            ManejoArchivos.borrarArchivo("espacios.txt");
+            for(Espacio espacio: Sistema.espacios){
+                String es = espacio.toString();
+                ManejoArchivos.EscribirArchivo("espacios.txt", es);
+            }
+            for(Usuario usuario: Sistema.usuarios){
+                if(r.getCodigoUsuario() == usuario.getCodigoUnico()){
+                    enviarNotificacion(r,usuario, r.getEstadoDeLaReserva());
+                }
+            }
+        }
+
+        
+    } 
 }

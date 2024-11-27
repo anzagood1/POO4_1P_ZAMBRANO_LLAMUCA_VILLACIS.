@@ -3,6 +3,14 @@ package src.Funcionalidades;
 import ENUMS.TipoEspacio;
 import ENUMS.EstadoEspacio;
 
+/**
+* Método constructor de la clase espacio.
+* @param codigoUnico código único del espacio.
+* @param tipoDeEspacio tipo de espacio.
+* @param nombre nombre de espacio.
+* @param capacidad capacidad del espacio.
+* @param estado estado del espacio.
+*/
 public class Espacio {
     private String codigoUnico;
     private TipoEspacio tipoDeEspacio;

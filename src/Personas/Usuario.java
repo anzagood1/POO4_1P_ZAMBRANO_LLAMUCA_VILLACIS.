@@ -39,16 +39,6 @@ public abstract class Usuario{
    * @return no retorna valor, impreme en consola.
    **/
   public void enviarNotificacion(Reserva rs, Espacio es){
-    ArrayList<Administrador> admins = new ArrayList<Administrador>();
-    for (Usuario u: Sistema.usuarios){
-      if ( u instanceof Administrador){
-        Administrador a = (Administrador)u;
-        admins.add(a);
-      }
-    }
-    Random r = new Random();
-    int i = r.nextInt(0, admins.size()-1);
-    String mail = admins.get(i).getCorreo();
     Dotenv dot = Dotenv.load();
 
     String host = dot.get("MAIL_HOST");
@@ -71,8 +61,8 @@ public abstract class Usuario{
     try {
         Message mes = new MimeMessage(sesion);
         mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
-        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
-        mes.setSubject("Reserva Realizada");
+        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("svillacish@gmail.com"));
+        mes.setSubject("Solicitud de reserva Realizada");
         mes.setText("De: " + this.getCorreo() + "\n" + "El estudiante " + this.getNombres() + this.getApellidos() + 
         " ha realizado una reserva con codigo " + rs.getCodigoReserva() + " para la fecha " + rs.getFechaReserva() + " en el espacio " + 
         es.getNombre() + ". Su motivo es: " +
@@ -83,7 +73,7 @@ public abstract class Usuario{
     }
 
 
-    }
+  }
 
 
   /**
@@ -94,16 +84,6 @@ public abstract class Usuario{
    * @return no retorna valor, impreme en consola.
    **/
   public void enviarNotificacion(Reserva rs, Espacio es, String materia){
-    ArrayList<Administrador> admins = new ArrayList<Administrador>();
-    for (Usuario u: Sistema.usuarios){
-      if ( u instanceof Administrador){
-        Administrador a = (Administrador)u;
-        admins.add(a);
-      }
-    }
-    Random r = new Random();
-    int i = r.nextInt(0, admins.size()-1);
-    String mail = admins.get(i).getCorreo();
     Dotenv dot = Dotenv.load();
 
     String host = dot.get("MAIL_HOST");
@@ -126,7 +106,7 @@ public abstract class Usuario{
     try {
         Message mes = new MimeMessage(sesion);
         mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
-        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mail));
+        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("svillacish@gmail.com"));
         mes.setSubject("Reserva Realizada");
         mes.setText("De: " + this.getCorreo() + "\n" + "Se le notifica que el profesor " + this.getNombres() + 
         this.getApellidos() + " ha realizado una reserva con codigo " + rs.getCodigoReserva() + " para la fecha " + 
@@ -216,7 +196,7 @@ public abstract class Usuario{
       }
     }
     
-  } 
+  }
 
 //Setters
   public void setCodigoUnico(String codigoUnico){

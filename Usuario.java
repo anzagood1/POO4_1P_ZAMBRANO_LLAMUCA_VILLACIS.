@@ -21,6 +21,7 @@ public abstract class Usuario{
 
   public abstract void gestionarReserva();
 
+//Metodo enviar mail: Estudiante
   public void enviarNotificacion(Reserva rs, Espacio es){
     ArrayList<Administrador> admins = new ArrayList<Administrador>();
     for (Usuario u: Sistema.usuarios){
@@ -68,6 +69,7 @@ public abstract class Usuario{
 
     }
 
+//Metodo enviar mail: Profesor
   public void enviarNotificacion(Reserva rs, Espacio es, String materia){
     ArrayList<Administrador> admins = new ArrayList<Administrador>();
     for (Usuario u: Sistema.usuarios){
@@ -111,7 +113,81 @@ public abstract class Usuario{
         System.out.println(e.getMessage());
     }
   }
+//Metodo enviar mail: Administrador
+  public void enviarNotificacion(Reserva r, Usuario u, EstadoReserva er){
+    String desicion;
+    if(er == EstadoReserva.RECHAZADO){
+      Scanner sc = new Scanner(System.in);
+      System.out.println("Cual es el motivo del rechazo? ");
+      String motivo = sc.nextLine();
+      desicion = "rechazado";
+      Dotenv dot = Dotenv.load();
 
+    String host = dot.get("MAIL_HOST");
+    String port = dot.get("MAIL_PORT");
+    String user = dot.get("MAIL_USER");
+    String pass = dot.get("MAIL_PASS");
+
+    Properties prop = new Properties();
+    prop.put("mail.smtp.host", host);
+    prop.put("mail.smtp.port", port);
+    prop.put("mail.smtp.auth", true);
+    prop.put("mail.smtp.starttls.enable", true);
+
+    Session sesion = Session.getInstance(prop, new Authenticator(){
+        protected PasswordAuthentication getPasswordAuthentication(){
+            return new PasswordAuthentication(user, pass);
+        }
+    });
+
+    try {
+        Message mes = new MimeMessage(sesion);
+        mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
+        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(u.getCorreo()));
+        mes.setSubject("ESTADO DE RESERVA: " + er);
+        mes.setText("De: " + this.getCorreo() + "\n" + "Se ha " + desicion + " su reserva con codigo " 
+        + r.getCodigoReserva() + " por el siguiente motivo: " + motivo);
+        Transport.send(mes);
+    } catch (Exception e){
+        System.out.println(e.getMessage());
+    }
+    } else if(er == EstadoReserva.APROBADO){
+      desicion = "aprobado";
+      Dotenv dot = Dotenv.load();
+
+      String host = dot.get("MAIL_HOST");
+      String port = dot.get("MAIL_PORT");
+      String user = dot.get("MAIL_USER");
+      String pass = dot.get("MAIL_PASS");
+
+      Properties prop = new Properties();
+      prop.put("mail.smtp.host", host);
+      prop.put("mail.smtp.port", port);
+      prop.put("mail.smtp.auth", true);
+      prop.put("mail.smtp.starttls.enable", true);
+
+      Session sesion = Session.getInstance(prop, new Authenticator(){
+        protected PasswordAuthentication getPasswordAuthentication(){
+            return new PasswordAuthentication(user, pass);
+        }
+      });
+
+      try {
+          Message mes = new MimeMessage(sesion);
+          mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
+          mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(u.getCorreo()));
+          mes.setSubject("ESTADO DE RESERVA: " + er);
+          mes.setText("De: " + this.getCorreo() + "\n" + "Se ha " + desicion + " su reserva con codigo " 
+          + r.getCodigoReserva());
+          Transport.send(mes);
+      } catch (Exception e){
+        System.out.println(e.getMessage());
+      }
+    }
+    
+  } 
+
+//Setters
   public void setCodigoUnico(String codigoUnico){
     this.codigoUnico = codigoUnico;
   }
@@ -140,6 +216,7 @@ public abstract class Usuario{
     this.correo = correo;
   }
 
+//Getters
    public String getCodigoUnico(){
     return codigoUnico;
   }

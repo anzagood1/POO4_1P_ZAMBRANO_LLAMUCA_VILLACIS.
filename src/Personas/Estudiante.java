@@ -1,8 +1,8 @@
 package src.Personas;
 
 import src.Funcionalidades.*;
-import src.Principal.*
-import src.ENUMS.*
+import src.Principal.*;
+import src.ENUMS.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 

@@ -37,7 +37,7 @@ public class Profesor extends Usuario{
      * @return no retorna valores, imprime en consola.
      */
     public void consultarReserva(LocalDate fecha){
-        for (Reserva reserva: reservas){
+        for (Reserva reserva: Sistema.reservas){
           if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());

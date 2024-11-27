@@ -31,10 +31,10 @@ public class Administrador extends Usuario{
         System.out.println("Números de reservas: "+Reserva.numeroReservas);
         System.out.println("Reservas de Estudiantes: ");
         System.out.println("CÓDIGO RESERVA - ESTADO - FECHA - NOMBRES Y APELLIDOS - MATRÍCULA");
-        for (Reserva reserva: reservas){
+        for (Reserva reserva: Sistema.reservas){
             for (Usuario usuario: Sistema.usuarios){
                 if(reserva.getCodigoUnico==usuario.getCodigoUnico){
-                    if(usurio instanceof Estudiante){
+                    if(usuario instanceof Estudiante){
                     System.out.println(reserva.getCodigoReserva()+" - "+reserva.getEstadoDeLaReserva()+" - "+reserva.getFechaReserva()+" - "+usuario.getNombres()+" "+usuario.getApellidos()+" - "+usuario.getnumMatricula());
                     }
                 }
@@ -42,10 +42,10 @@ public class Administrador extends Usuario{
         }
         System.out.println("Reservas de Profesores: ");
         System.out.println("CÓDIGO RESERVA - ESTADO - FECHA - NOMBRES Y APELLIDOS - MATERIA");
-        for (Reserva reserva: reservas){
+        for (Reserva reserva: Sistema.reservas){
             for (Usuario usuario: Sistema.usuarios){
                 if(reserva.getCodigoUnico==usuario.getCodigoUnico){
-                    if(usurio instanceof Profesor){
+                    if(usuario instanceof Profesor){
                     System.out.println(reserva.getCodigoReserva()+" - "+reserva.getEstadoDeLaReserva()+" - "+reserva.getFechaReserva()+" - "+usuario.getNombres()+" "+usuario.getApellidos()+" - "+reserva.getMotivoReserva());
                     }
                 }

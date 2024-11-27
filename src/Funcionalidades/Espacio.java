@@ -1,6 +1,7 @@
 package src.Funcionalidades;
 
 import ENUMS.TipoEspacio;
+import ENUMS.EstadoEspacio;
 
 public class Espacio {
     private String codigoUnico;

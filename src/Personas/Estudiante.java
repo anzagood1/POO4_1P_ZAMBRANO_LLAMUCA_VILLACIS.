@@ -1,6 +1,8 @@
 package src.Personas;
 
 import Funcionalidades;
+import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Estudiante extends Usuario{
   private int numMatricula;

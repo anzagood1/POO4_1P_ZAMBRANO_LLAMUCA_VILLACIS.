@@ -73,8 +73,8 @@ public class Estudiante extends Usuario{
    * @param fecha es la fecha de la reserva a consultar.
    * @return no retorna valores, imprime en consola.
    */
-  public void consultarReserva(){
-    for (Reserva reserva: reservas){
+  public void consultarReserva(LocalDate fecha){
+    for (Reserva reserva: Sistema.reservas){
           if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
@@ -89,7 +89,7 @@ public class Estudiante extends Usuario{
             System.out.println("Nombre de Espacio"+espacio.getNombre());
             System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
               
-            for (Usuario usuario: usuarios){
+            for (Usuario usuario: Sistema.usuarios){
                 if (usu.getCodigoUnico==this.getCodigoUnico){
                     System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
                 }

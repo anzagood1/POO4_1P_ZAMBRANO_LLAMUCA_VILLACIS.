@@ -12,6 +12,13 @@ public class Sistema {
     public static ArrayList<Espacio> espacios = new ArrayList<>();
     public static ArrayList<Reserva> reservas = new ArrayList<>();
 
+    /**
+     * Método para cargar los datos de los usuarios contenidos en archivos.
+     * @param nombreArchivoUsuario archivo de los usuarios.
+     * @param nombreArchivoEstudiante archivo de los estudiantes.
+     * @param nombreArchivoProfesor archivo de los profesores.
+     * @param nombreArchivoAdministrador archivo de los administradores.
+     */
     public static void cargarUsuarios(String nombreArchivoUsuario, String nombreArchivoEstudiante, String nombreArchivoProfesor, String nombreArchivoAdministrador){
         ArrayList<String> UsuarioDatos = manejoArchivos.LeeFichero(nombreArchivoUsuario);
         ArrayList<String> EstudianteDatos = manejoArchivos.LeeFichero(nombreArchivoEstudiante);
@@ -65,6 +72,10 @@ public class Sistema {
         }
     }
 
+    /**
+     * Método para cargar los datos de los espacios contenidos en su archivo.
+     * @param nombreArchivoEspacios archivo que contiene los espacios.
+     */
     public static void cargarEspacios(String nombreArchivoEspacios){
        ArrayList<String> EspacioDatos = manejoArchivos.LeeFichero(nombreArchivoEspacios);
        for (String z : EspacioDatos){
@@ -78,6 +89,10 @@ public class Sistema {
        }
     }
 
+    /**
+     * Método que carga los datos de las reservas contenidas en su archivo.
+     * @param reservas archivo que contiene las reservas.
+     */
     public static void cargarReservas(String nombreArchivoReservas){
         ArrayList<String> ReservaDatos = manejoArchivos.LeeFichero(nombreArchivoReservas);
         for(String r : ReservaDatos){
@@ -94,6 +109,10 @@ public class Sistema {
         }
     }
 
+    /**
+     * método para que el usuario inicie sesión.
+     * @return retorna null si no encuentra ningún usuario coincidente.
+     */
     public static Usuario iniciarSesion(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Usuario: ");
@@ -109,6 +128,10 @@ public class Sistema {
         return null;
     }
 
+    /**
+     * método principal para que el sistema corra.
+     * @param usuario usuario que usa el sistema.
+     */
     public static void mostrarMenu(Usuario usuario){
         Scanner sc = new Scanner(System.in);
             if (usuario instanceof Estudiante){

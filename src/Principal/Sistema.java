@@ -187,7 +187,12 @@ public class Sistema {
            cargarEspacios("espacios.txt");
            cargarReservas("reservas.txt");
            Usuario usuario = iniciarSesion();
-           mostrarMenu(usuario);
+           if (usuario == null){
+            System.out.println("Usuario o contraseña incorrectos");
+            usuario = iniciarSesion();
+           }else{  
+             mostrarMenu(usuario);
+           }
         }
     }
 

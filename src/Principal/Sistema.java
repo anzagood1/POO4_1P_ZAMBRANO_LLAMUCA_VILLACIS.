@@ -18,7 +18,7 @@ public class Sistema {
         ArrayList<String> ProfesorDatos = manejoArchivos.LeeFichero(nombreArchivoProfesor);
         ArrayList<String> AdministradorDatos = manejoArchivos.LeeFichero(nombreArchivoAdministrador);
         for (String s : UsuarioDatos){
-            String [] datosUser = s.split(" | " );
+            String [] datosUser = s.split(" | ");
             String codigoUnico = datosUser[0];
             String cedula = datosUser[1];
             String nombres = datosUser[2];

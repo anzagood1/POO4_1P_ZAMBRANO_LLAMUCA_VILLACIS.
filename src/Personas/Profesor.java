@@ -112,6 +112,7 @@ public class Profesor extends Usuario{
         }
     }
 
+    //getters
     public facultad getFacultad(){
         return facultad;
     }
@@ -120,6 +121,7 @@ public class Profesor extends Usuario{
         return materias;
     }
 
+    //setters
     public void setFacultad(facultad facultad){
         this.facultad = facultad;
     }

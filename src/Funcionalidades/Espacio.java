@@ -1,4 +1,6 @@
-package com.example;
+package src.Funcionalidades;
+
+import ENUMS.TipoEspacio;
 
 public class Espacio {
     private String codigoUnico;

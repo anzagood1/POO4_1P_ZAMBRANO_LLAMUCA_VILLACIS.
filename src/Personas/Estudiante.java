@@ -22,7 +22,7 @@ public class Estudiante extends Usuario{
    * @return no retorna valor, es un constructor.
    */
   public Estudiante(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo, int numMatricula, String carrera){
-    super(codigoUnico, cedula,nombres, apellidos, usuario, contrasenia, correo)
+    super(codigoUnico, cedula,nombres, apellidos, usuario, contrasenia, correo);
     this.numMatricula= numMatricula;
     this.carrera= carrera;
   }

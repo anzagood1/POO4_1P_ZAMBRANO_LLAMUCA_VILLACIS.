@@ -28,8 +28,42 @@ public class Estudiante extends Usuario{
   /*
    * Este método permite al Estudiante realizar una reserva de un espacio.
   */
+  @Override
   public void gestionarReserva(){
-    super.gestionarReserva();
+    Scanner sc = new Scanner(System.in);
+    System.out.println("En que fecha desea realizar su reserva? (AAAA-MM-DD)");
+    String fString = sc.nextLine();
+    System.out.println("Que tipo de espacio desea reservar? (AULA, CACNCHA)");
+    String tipo = sc.nextLine();
+    TipoEspacio tipoEspacio = TipoEspacio.valueOf(tipo.toUpperCase());
+    LocalDate fecha = LocalDate.parse(fString);
+    int i = 0;
+    for (Espacio espacio: Sistema.espacios){
+      if(espacio.getTipoDeEspacio() == tipoEspacio){
+        if(espacio.getEstado() == EstadoEspacio.DISPONIBLE){
+          i++;
+          System.out.println(i + ".|" + espacio);
+        }
+      }
+    }
+    System.out.println("Elija el numero del espacio que desea reservar ");
+    int eleccion = sc.nextInt();
+    sc.nextLine();
+    Espacio e = Sistema.espacios.get(eleccion-1);
+    System.out.println("Porque desea realizar la reserva?");
+    String motivo = sc.nextLine();
+    System.out.println("Desea reservar el espacio codigo " + e.getCodigoUnico() + " en la fecha " + fecha + "?");
+    System.out.println("1.- Si");
+    System.out.println("2.- No");
+    int desicion = sc.nextInt();
+    sc.nextLine();
+    if(desicion == 1){
+      Reserva r = new Reserva(Reserva.generarCodigoReserva(), e.getCodigoUnico(), fecha, e.getTipoDeEspacio(), EstadoReserva.PENDIENTE, motivo, this.getCodigoUnico(), this.getCedula());
+      Sistema.reservas.add(r);
+      String rs = r.toString();
+      ManejoArchivos.EscribirArchivo("reservas.txt", rs);
+      enviarNotificacion(r, e);
+    }
   }
 
   /*

@@ -26,6 +26,7 @@ public class Espacio {
         this.estado = estado;
     }
     
+    //setters
     public void setCodigoUnico(String codigoUnico){
         this.codigoUnico = codigoUnico;
     }
@@ -46,6 +47,7 @@ public class Espacio {
         this.estado = estado;
     }
 
+    //getters
     public String getCodigoUnico(){
         return codigoUnico;
     }

@@ -160,9 +160,11 @@ public class Sistema {
         }
 
         public static void main(String[] args){
-           Sistema.cargarUsuarios("usuario.txt", "estudiantes.txt", "profesores.txt", "administradores.txt");
-           Sistema.cargarEspacios("espacios.txt");
-           Sistema.cargarReservas("reservas.txt");
+           cargarUsuarios("usuario.txt", "estudiantes.txt", "profesores.txt", "administradores.txt");
+           cargarEspacios("espacios.txt");
+           cargarReservas("reservas.txt");
+           Usuario usuario = iniciarSesion();
+           mostrarMenu(usuario);
         }
     }
 

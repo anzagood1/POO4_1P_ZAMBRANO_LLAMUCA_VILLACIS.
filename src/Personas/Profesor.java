@@ -117,7 +117,7 @@ public class Profesor extends Usuario{
     }
 
     //getters
-    public facultad getFacultad(){
+    public String getFacultad(){
         return facultad;
     }
 
@@ -126,7 +126,7 @@ public class Profesor extends Usuario{
     }
 
     //setters
-    public void setFacultad(facultad facultad){
+    public void setFacultad(String facultad){
         this.facultad = facultad;
     }
 

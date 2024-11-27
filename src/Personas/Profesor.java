@@ -1,5 +1,8 @@
+package src.Personas;
+
 import java.util.ArrayList;
 import Funcionalidades;
+
 public class Profesor extends Usuario{
     
     private facultad facultad;

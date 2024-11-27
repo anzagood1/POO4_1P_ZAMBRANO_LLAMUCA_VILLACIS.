@@ -1,9 +1,11 @@
-package src.Personas;
+package com.example.Personas;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Funcionalidades;
+import com.example.Funcionalidades.*;
+import com.example.Principal.*;
+import com.example.ENUMS.*;
 
 public class Profesor extends Usuario{
     
@@ -38,22 +40,22 @@ public class Profesor extends Usuario{
      */
     public void consultarReserva(LocalDate fecha){
         for (Reserva reserva: Sistema.reservas){
-          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
+          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUsuario()==this.getCodigoUnico()){
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
             System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
 
             for (Espacio espacio: Sistema.espacios){
-              if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
+              if (espacio.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
                 System.out.println("Nombre de Espacio"+espacio.getNombre());
                 System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
+                System.out.println("Nombre de Espacio"+espacio.getNombre());
+                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
               }
             }
-            System.out.println("Nombre de Espacio"+espacio.getNombre());
-            System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
-              
-            for (Usuario usuario: usuarios){
-                if (usu.getCodigoUnico==this.getCodigoUnico){
+ 
+            for (Usuario usuario: Sistema.usuarios){
+                if (usuario.getCodigoUnico()==this.getCodigoUnico()){
                     System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
                 }
             }
@@ -105,12 +107,12 @@ public class Profesor extends Usuario{
             Reserva r = new Reserva(Reserva.generarCodigoReserva(), e.getCodigoUnico(), fecha, e.getTipoDeEspacio(), EstadoReserva.APROBADO, materia, this.getCodigoUnico(), this.getCedula());
             Sistema.reservas.add(r);
             String rs = r.toString();
-            ManejoArchivos.EscribirArchivo("reservas.txt", rs);
+            manejoArchivos.EscribirArchivo("reservas.txt", rs);
             e.setEstado(EstadoEspacio.RESERVADO);
-            ManejoArchivos.borrarArchivo("espacios.txt");
+            manejoArchivos.borrarArchivo("espacios.txt");
             for(Espacio espacio: Sistema.espacios){
                 String es = espacio.toString();
-                ManejoArchivos.EscribirArchivo("espacios.txt", es);
+                manejoArchivos.EscribirArchivo("espacios.txt", es);
             }
             enviarNotificacion(r, e, materia);
         }

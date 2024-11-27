@@ -2,6 +2,7 @@ package src.Personas;
 
 import Funcionalidades;
 import ENUMS.Cargo;
+import java.util.Scanner;
 
 public class Administrador extends Usuario{
     Cargo cargoAdmin;

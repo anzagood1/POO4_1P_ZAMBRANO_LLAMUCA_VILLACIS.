@@ -1,7 +1,8 @@
 package src.Personas;
 
-import Funcionalidades;
-import ENUMS.Cargo;
+import src.Funcionalidades.*;
+import src.ENUMS.Cargo;
+import src.Principal.*;
 import java.util.Scanner;
 
 public class Administrador extends Usuario{

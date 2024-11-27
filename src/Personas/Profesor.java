@@ -106,9 +106,6 @@ public class Profesor extends Usuario{
                 ManejoArchivos.EscribirArchivo("espacios.txt", es);
             }
             enviarNotificacion(r, e, materia);
-            System.out.println("Regresando al menu...");
-        }else{
-            System.out.println("Regresando al menu...");
         }
     }
 

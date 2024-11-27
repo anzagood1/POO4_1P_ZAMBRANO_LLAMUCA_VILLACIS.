@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.LocalDate;
+import Personas;
+import Funcionalidades;
+import ENUMS;
 
 public class Sistema {
     public static ArrayList<Usuario> usuarios = new ArrayList<>();

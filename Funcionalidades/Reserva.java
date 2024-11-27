@@ -90,6 +90,9 @@ public class Reserva {
 
     public static int generarCodigoReserva(){
         int i = (Sistema.reservas.size()) - 1;
+        if(i<0){
+            return 1;
+        }
         Reserva ultimo = Sistema.reservas.get(i);
         int codUnico = (ultimo.getCodigoReserva()) + 1;
         return codUnico;

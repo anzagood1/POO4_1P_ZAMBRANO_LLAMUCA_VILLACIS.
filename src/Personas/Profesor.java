@@ -7,7 +7,7 @@ import Funcionalidades;
 
 public class Profesor extends Usuario{
     
-    private facultad facultad;
+    private String facultad;
     private ArrayList<String> materias;
 
 
@@ -24,7 +24,7 @@ public class Profesor extends Usuario{
      * @param materias materias que dicta el profesor.
      * @return no returna valor, es un constructor.
      */
-    public Profesor(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo, facultad facultad, ArrayList<String> materias){
+    public Profesor(String codigoUnico, String cedula, String nombres, String apellidos, String usuario, String contrasenia, String correo, String facultad, ArrayList<String> materias){
         super(codigoUnico, cedula,nombres, apellidos, usuario, contrasenia, correo);
         this.facultad = facultad;
         this.materias= materias ;

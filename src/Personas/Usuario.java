@@ -13,6 +13,7 @@ import src.Funcionalidades.*;
 import src.ENUMS.*;
 
 public abstract class Usuario{
+  public static Scanner sc = new Scanner(System.in);
   protected String codigoUnico;
   protected String cedula;
   protected String nombres;

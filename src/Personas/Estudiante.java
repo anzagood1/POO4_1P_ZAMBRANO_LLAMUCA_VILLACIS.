@@ -103,9 +103,8 @@ public class Estudiante extends Usuario{
                 }
             }
             System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
-        }else{
-          System.out.println("Regresando al menu");
-        }}
+        }
+    }
    //sc.close();
 }
 

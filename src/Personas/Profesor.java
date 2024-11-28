@@ -45,29 +45,35 @@ public class Profesor extends Usuario{
         System.out.println("Cual es la fecha de la reserva que desea consultar? (AAAA-MM-DD)");
         String fString = sc.nextLine();
         LocalDate fecha = LocalDate.parse(fString);
+        int i = 0;
         for (Reserva reserva: Sistema.reservas){
-          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUsuario().equals(this.getCodigoUnico())){
+          if (reserva.getFechaReserva().isEqual(fecha) && reserva.getCodigoUsuario().equals(this.getCodigoUnico())){
+            i++;
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
             System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
 
             for (Espacio espacio: Sistema.espacios){
               if (espacio.getCodigoUnico().equals(reserva.getCodigoUnicoEspacio())){
-                System.out.println("Nombre de Espacio"+espacio.getNombre());
+                System.out.println("Nombre de Espacio: " + espacio.getNombre());
                 System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
-                System.out.println("Nombre de Espacio"+espacio.getNombre());
-                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
               }
             }
  
             for (Usuario usuario: Sistema.usuarios){
                 if (usuario.getCodigoUnico().equals(this.getCodigoUnico())){
-                    System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
+                    System.out.println("Nombres y Apellidos: "+usuario.getNombres()+ " "+usuario.getApellidos());
                 }
             }
             System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
           }
         }
+        if(i == 0){
+            System.out.println("No se encontraron reservas en la fecha ingresada");
+            System.out.println("Regresando al menu...");
+        }else{
+            System.out.println("Regresando al menu...");
+          }
     }
 
     /**
@@ -81,26 +87,31 @@ public class Profesor extends Usuario{
         System.out.println("Que tipo de espacio desea reservar? (AULA, AUDITORIO, LABORATORIO)");
         String tipo = (sc.nextLine()).toUpperCase();
         TipoEspacio tipoEspacio = TipoEspacio.valueOf(tipo.toUpperCase());
+        int y = 0;
         for (Espacio espacio: Sistema.espacios){
             if((espacio.getTipoDeEspacio()) == tipoEspacio){
                 if(espacio.getEstado() == EstadoEspacio.DISPONIBLE){
                     System.out.println(espacio);
+                    y++;
                 }
             }
         }
+        if(y != 0){
         System.out.println("Elija el codigo del espacio que desea reservar ");
         String eleccion = sc.nextLine();
+        int x = 0;
         int i = 0;
-        for(String materia:this.getMaterias()){
-            i++;
-            System.out.println(i + ".|" + materia);
-        }  
-        System.out.println("Para que numero de materia desea hacer la reserva?");
-        int num = sc.nextInt();
-        sc.nextLine();
-        String materia = this.getMaterias().get(num-1);
         for(Espacio espacio: Sistema.espacios){
             if(eleccion.equals(espacio.getCodigoUnico())){
+                for(String materia:this.getMaterias()){
+                    i++;
+                    System.out.println(i + ".|" + materia);
+                }  
+                System.out.println("Para que numero de materia desea hacer la reserva?");
+                int num = sc.nextInt();
+                sc.nextLine();
+                String materia = this.getMaterias().get(num-1);
+                x++;
                 System.out.println("Desea reservar el espacio codigo " + espacio.getCodigoUnico() + " en la fecha " + fecha + "?");
                 System.out.println("1.- Si");
                 System.out.println("2.- No");
@@ -118,13 +129,22 @@ public class Profesor extends Usuario{
                         manejoArchivos.EscribirArchivo("espacios.txt", es);
                     }
                     enviarNotificacion(r, espacio, materia);
-                    System.out.println("Reserva creada, regresando al menu...");
+                    System.out.println("Reserva creada");
+                    System.out.println("Regresando al menu...");
                 } else{
                     System.out.println("Regresando al menu...");
                 }
             }
         }
+        if(x == 0){
+            System.out.println("El codigo ingresado no pertenece a ningun espacio");
+            System.out.println("Regresando al menu...");
+        }
+    }else{
+        System.out.println("No hay espacios disponibles");
+        System.out.println("Regresando al menu...");
     }
+}
 
     //getters
     public String getFacultad(){
@@ -144,3 +164,4 @@ public class Profesor extends Usuario{
         this.materias = materias;
     }
 }
+

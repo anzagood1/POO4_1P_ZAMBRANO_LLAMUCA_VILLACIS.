@@ -54,9 +54,9 @@ public class Administrador extends Usuario{
         }
     }
 
-    /**
-    * Método que permite al admnistrador aprobar o rechazar las reservas.
-    */
+        /**
+     * Método que permite al admnistrador aprobar o rechazar las reservas.
+     */
     @Override
     public void gestionarReserva(){
         for(Reserva reserva: Sistema.reservas){
@@ -69,19 +69,19 @@ public class Administrador extends Usuario{
         sc.nextLine();
         for (Reserva reserva: Sistema.reservas){
             if(reserva.getCodigoReserva() == eleccion){
-                System.out.println(reserva.getCodigoReserva());
-                System.out.println(reserva.getFechaReserva());
+                System.out.println("Codigo de Reserva: " + reserva.getCodigoReserva());
+                System.out.println("Fecha de Reserva: " + reserva.getFechaReserva());
                 for(Espacio espacio: Sistema.espacios){
                     if(reserva.getCodigoUnicoEspacio().equals(espacio.getCodigoUnico())){
-                        System.out.println(espacio.getTipoDeEspacio());
-                        System.out.println(espacio.getNombre());
-                        System.out.println(espacio.getCapacidad());  
+                        System.out.println("Tipo de Espacio: " + espacio.getTipoDeEspacio());
+                        System.out.println("Nombre de Espacio: " + espacio.getNombre());
+                        System.out.println("Capacidad de Espacio: " + espacio.getCapacidad());  
                     }   
                 }
                 for (Usuario usuario: Sistema.usuarios){
                     if(reserva.getCodigoUsuario().equals(usuario.getCodigoUnico())){
-                        System.out.println(usuario.getNombres());
-                        System.out.println(usuario.getApellidos());
+                        System.out.println("Nombres de Usuario: " + usuario.getNombres());
+                        System.out.println("Apellidos de Usuario: " + usuario.getApellidos());
                     }
                 }
             }
@@ -97,6 +97,11 @@ public class Administrador extends Usuario{
                         if(reserv.getCodigoUnicoEspacio().equals(espacio.getCodigoUnico())){
                             espacio.setEstado(EstadoEspacio.RESERVADO);
                 }
+            }
+            manejoArchivos.borrarArchivo("reservas.txt");
+            for(Reserva reservs: Sistema.reservas){
+                String rs = reservs.toString();
+                manejoArchivos.EscribirArchivo("espacios.txt", rs);
             }
             manejoArchivos.borrarArchivo("espacios.txt");
             for(Espacio espacio: Sistema.espacios){
@@ -117,6 +122,11 @@ public class Administrador extends Usuario{
                         espacio.setEstado(EstadoEspacio.DISPONIBLE);
                     }
                 }
+            manejoArchivos.borrarArchivo("reservas.txt");
+                for(Reserva reservs: Sistema.reservas){
+                    String rs = reservs.toString();
+                    manejoArchivos.EscribirArchivo("espacios.txt", rs);
+                }
                 manejoArchivos.borrarArchivo("espacios.txt");
                 for(Espacio espacio: Sistema.espacios){
                     String es = espacio.toString();
@@ -130,6 +140,8 @@ public class Administrador extends Usuario{
             }
         }
     }
+}
+
 
     //setter
     public void setCargo (Cargo cargoAdmin){

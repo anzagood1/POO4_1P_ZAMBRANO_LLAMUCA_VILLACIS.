@@ -80,46 +80,49 @@ public class Profesor extends Usuario{
         LocalDate fecha = LocalDate.parse(fString);
         System.out.println("Que tipo de espacio desea reservar? (AULA, AUDITORIO, LABORATORIO)");
         String tipo = (sc.nextLine()).toUpperCase();
-        int i = 0;
         TipoEspacio tipoEspacio = TipoEspacio.valueOf(tipo.toUpperCase());
         for (Espacio espacio: Sistema.espacios){
             if((espacio.getTipoDeEspacio()) == tipoEspacio){
                 if(espacio.getEstado() == EstadoEspacio.DISPONIBLE){
-                    i++;
-                    System.out.println(i + ".|" + espacio);
+                    System.out.println(espacio);
                 }
             }
         }
-        System.out.println("Elija el numero del espacio que desea reservar ");
-        int eleccion = sc.nextInt();
-        sc.nextLine();
-        i = 0;
+        System.out.println("Elija el codigo del espacio que desea reservar ");
+        String eleccion = sc.nextLine();
+        int i = 0;
         for(String materia:this.getMaterias()){
-        i++;
-        System.out.println(i + ".|" + materia);
+            i++;
+            System.out.println(i + ".|" + materia);
         }  
         System.out.println("Para que numero de materia desea hacer la reserva?");
         int num = sc.nextInt();
         sc.nextLine();
         String materia = this.getMaterias().get(num-1);
-        Espacio e = Sistema.espacios.get(eleccion-1);
-        System.out.println("Desea reservar el espacio codigo " + e.getCodigoUnico() + " en la fecha " + fecha + "?");
-        System.out.println("1.- Si");
-        System.out.println("2.- No");
-        int desicion = sc.nextInt();
-        sc.nextLine();
-        if(desicion == 1){
-            Reserva r = new Reserva(Reserva.generarCodigoReserva(), e.getCodigoUnico(), fecha, e.getTipoDeEspacio(), EstadoReserva.APROBADO, materia, this.getCodigoUnico(), this.getCedula());
-            Sistema.reservas.add(r);
-            String rs = r.toString();
-            manejoArchivos.EscribirArchivo("reservas.txt", rs);
-            e.setEstado(EstadoEspacio.RESERVADO);
-            manejoArchivos.borrarArchivo("espacios.txt");
-            for(Espacio espacio: Sistema.espacios){
-                String es = espacio.toString();
-                manejoArchivos.EscribirArchivo("espacios.txt", es);
+        for(Espacio espacio: Sistema.espacios){
+            if(eleccion.equals(espacio.getCodigoUnico())){
+                System.out.println("Desea reservar el espacio codigo " + espacio.getCodigoUnico() + " en la fecha " + fecha + "?");
+                System.out.println("1.- Si");
+                System.out.println("2.- No");
+                int desicion = sc.nextInt();
+                sc.nextLine();
+                if(desicion == 1){
+                    Reserva r = new Reserva(Reserva.generarCodigoReserva(), espacio.getCodigoUnico(), fecha, espacio.getTipoDeEspacio(), EstadoReserva.APROBADO, materia, this.getCodigoUnico(), this.getCedula());
+                    Sistema.reservas.add(r);
+                    String rs = r.toString();
+                    manejoArchivos.EscribirArchivo("reservas.txt", rs);
+                    espacio.setEstado(EstadoEspacio.RESERVADO);
+                    manejoArchivos.borrarArchivo("espacios.txt");
+                    for(Espacio espa: Sistema.espacios){
+                        String es = espa.toString();
+                        manejoArchivos.EscribirArchivo("espacios.txt", es);
+                    }
+                    enviarNotificacion(r, espacio, materia);
+                    System.out.println("Reserva creada, regresando al menu...");
+                } else{
+                    System.out.println("Regresando al menu...");
+                }
             }
-            enviarNotificacion(r, e, materia);
         }
     }
 

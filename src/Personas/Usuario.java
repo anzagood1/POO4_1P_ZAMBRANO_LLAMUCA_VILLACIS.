@@ -1,16 +1,14 @@
-package src.Personas;
+package com.example.Personas;
 
 import java.util.Properties;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import io.github.cdimascio.dotenv.Dotenv;
 import javax.mail.*;
 import java.util.Scanner;
-import src.Funcionalidades.*;
-import src.ENUMS.*;
+import com.example.Funcionalidades.*;
+import com.example.ENUMS.*; 
 
 public abstract class Usuario{
   public static Scanner sc = new Scanner(System.in);
@@ -78,7 +76,7 @@ public abstract class Usuario{
         mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
         mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("svillacish@gmail.com"));
         mes.setSubject("Solicitud de reserva Realizada");
-        mes.setText("De: " + this.getCorreo() + "\n" + "El estudiante " + this.getNombres() + this.getApellidos() + 
+        mes.setText("De: " + this.getCorreo() + "\n \n" + "El estudiante " + this.getNombres() + this.getApellidos() + 
         " ha realizado una reserva con codigo " + rs.getCodigoReserva() + " para la fecha " + rs.getFechaReserva() + " en el espacio " + 
         es.getNombre() + ". Su motivo es: " +
         rs.getMotivoReserva() + ". Ingrese en el sistema para aprobar o rechazar la reserva");
@@ -123,7 +121,7 @@ public abstract class Usuario{
         mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
         mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("svillacish@gmail.com"));
         mes.setSubject("Reserva Realizada");
-        mes.setText("De: " + this.getCorreo() + "\n" + "Se le notifica que el profesor " + this.getNombres() + 
+        mes.setText("De: " + this.getCorreo() + "\n \n" + "Se le notifica que el profesor " + this.getNombres() + 
         this.getApellidos() + " ha realizado una reserva con codigo " + rs.getCodigoReserva() + " para la fecha " + 
         rs.getFechaReserva() + " en el espacio " + es.getNombre() + " para la materia " + materia);
         Transport.send(mes);
@@ -172,7 +170,7 @@ public abstract class Usuario{
         mes.setSubject("ESTADO DE RESERVA: " + er);
         mes.setText("De: " + this.getCorreo() + "\n \n" + "Se ha " + desicion + " su reserva con codigo " 
         + r.getCodigoReserva() + " por el siguiente motivo: " + motivo + "\n \n" + "Atentamente," 
-        + "Departamento administrativo");
+        + "\n" + "Departamento administrativo");
         Transport.send(mes);
     } catch (Exception e){
         System.out.println(e.getMessage());

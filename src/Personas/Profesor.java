@@ -1,14 +1,16 @@
-package src.Personas;
+package com.example.Personas;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import src.Funcionalidades.*;
-import src.Principal.*;
-import src.ENUMS.*;
+import com.example.Funcionalidades.*;
+import com.example.Principal.*;
+import com.example.ENUMS.TipoEspacio;
+import com.example.ENUMS.EstadoEspacio;
+import com.example.ENUMS.EstadoReserva;
 
 public class Profesor extends Usuario{
-    
+    public static Scanner sc = new Scanner(System.in);
     private String facultad;
     private ArrayList<String> materias;
 
@@ -38,15 +40,19 @@ public class Profesor extends Usuario{
      * @param fecha la fecha de la reserva a consultar.
      * @return no retorna valores, imprime en consola.
      */
-    public void consultarReserva(LocalDate fecha){
+    @Override
+    public void consultarReserva(){
+        System.out.println("Cual es la fecha de la reserva que desea consultar? (AAAA-MM-DD)");
+        String fString = sc.nextLine();
+        LocalDate fecha = LocalDate.parse(fString);
         for (Reserva reserva: Sistema.reservas){
-          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUsuario()==this.getCodigoUnico()){
+          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUsuario().equals(this.getCodigoUnico())){
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
             System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
 
             for (Espacio espacio: Sistema.espacios){
-              if (espacio.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
+              if (espacio.getCodigoUnico().equals(reserva.getCodigoUnicoEspacio())){
                 System.out.println("Nombre de Espacio"+espacio.getNombre());
                 System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
                 System.out.println("Nombre de Espacio"+espacio.getNombre());
@@ -55,7 +61,7 @@ public class Profesor extends Usuario{
             }
  
             for (Usuario usuario: Sistema.usuarios){
-                if (usuario.getCodigoUnico()==this.getCodigoUnico()){
+                if (usuario.getCodigoUnico().equals(this.getCodigoUnico())){
                     System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
                 }
             }
@@ -69,7 +75,6 @@ public class Profesor extends Usuario{
      */
     @Override
     public void gestionarReserva(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("En que fecha desea realizar su reserva? (AAAA-MM-DD)");
         String fString = sc.nextLine();
         LocalDate fecha = LocalDate.parse(fString);

@@ -54,7 +54,7 @@ public class Administrador extends Usuario{
         }
     }
 
-     /**
+    /**
      * Método que permite al admnistrador aprobar o rechazar las reservas.
      */
     @Override
@@ -91,16 +91,17 @@ public class Administrador extends Usuario{
         EstadoReserva tipoEstado = EstadoReserva.valueOf(estado.toUpperCase());
         if (tipoEstado == EstadoReserva.APROBADO){
             for(Reserva reserv: Sistema.reservas){
-                if(reserv.getCodigoReserva() == eleccion)
+                if(reserv.getCodigoReserva() == eleccion){
                     reserv.setEstadoDeLaReserva(EstadoReserva.APROBADO);
                     for(Espacio espacio: Sistema.espacios){
                         if(reserv.getCodigoUnicoEspacio().equals(espacio.getCodigoUnico())){
                             espacio.setEstado(EstadoEspacio.RESERVADO);
                         }
                     }
-                for(Usuario usuario: Sistema.usuarios){
-                    if(reserv.getCodigoUsuario().equals(usuario.getCodigoUnico())){
-                        enviarNotificacion(reserv,usuario, reserv.getEstadoDeLaReserva());
+                    for(Usuario usuario: Sistema.usuarios){
+                        if(reserv.getCodigoUsuario().equals(usuario.getCodigoUnico())){
+                            enviarNotificacion(reserv,usuario, reserv.getEstadoDeLaReserva());
+                        }
                     }
                 }
             }  
@@ -132,6 +133,7 @@ public class Administrador extends Usuario{
             manejoArchivos.EscribirArchivo("espacios.txt", es);
         }   
     }
+}
 
 
     //setter

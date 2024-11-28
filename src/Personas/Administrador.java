@@ -130,4 +130,14 @@ public class Administrador extends Usuario{
             }
         }
     }
+
+    //setter
+    public void setCargo (Cargo cargoAdmin){
+        this.cargoAdmin= cargoAdmin;
+    }
+
+    //getter
+    publico void getCargo (Cargo cargoAdmin){
+        return cargoAdmin;
+    }
 }

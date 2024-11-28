@@ -38,7 +38,7 @@ public class Estudiante extends Usuario{
    // Scanner sc = new Scanner(System.in);
     System.out.println("En que fecha desea realizar su reserva? (AAAA-MM-DD)");
     String fString = sc.nextLine();
-    System.out.println("Que tipo de espacio desea reservar? (AULA, CACNCHA)");
+    System.out.println("Que tipo de espacio desea reservar? (AULA, CANCHA)");
     String tipo = sc.nextLine();
     TipoEspacio tipoEspacio = TipoEspacio.valueOf(tipo.toUpperCase());
     LocalDate fecha = LocalDate.parse(fString);

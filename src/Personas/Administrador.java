@@ -137,7 +137,7 @@ public class Administrador extends Usuario{
     }
 
     //getter
-    publico void getCargo (Cargo cargoAdmin){
+    publico void getCargo (){
         return cargoAdmin;
     }
 }

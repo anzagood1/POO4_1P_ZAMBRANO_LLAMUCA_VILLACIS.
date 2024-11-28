@@ -1,12 +1,13 @@
-package src.Personas;
+package com.example.Personas;
 
-import src.Funcionalidades.*;
-import src.Principal.*;
-import src.ENUMS.*;
+import com.example.Funcionalidades.*;
+import com.example.Principal.*;
+import com.example.ENUMS.*;
 import java.util.Scanner;
 import java.time.LocalDate;
 
 public class Estudiante extends Usuario{
+  public static Scanner sc = new Scanner(System.in);
   private int numMatricula;
   private String carrera;
 
@@ -34,7 +35,7 @@ public class Estudiante extends Usuario{
   */
   @Override
   public void gestionarReserva(){
-    Scanner sc = new Scanner(System.in);
+   // Scanner sc = new Scanner(System.in);
     System.out.println("En que fecha desea realizar su reserva? (AAAA-MM-DD)");
     String fString = sc.nextLine();
     System.out.println("Que tipo de espacio desea reservar? (AULA, CACNCHA)");
@@ -50,56 +51,65 @@ public class Estudiante extends Usuario{
         }
       }
     }
-    System.out.println("Elija el numero del espacio que desea reservar ");
-    int eleccion = sc.nextInt();
-    sc.nextLine();
-    Espacio e = Sistema.espacios.get(eleccion-1);
-    System.out.println("Porque desea realizar la reserva?");
-    String motivo = sc.nextLine();
-    System.out.println("Desea reservar el espacio codigo " + e.getCodigoUnico() + " en la fecha " + fecha + "?");
-    System.out.println("1.- Si");
-    System.out.println("2.- No");
-    int desicion = sc.nextInt();
-    sc.nextLine();
-    if(desicion == 1){
-      Reserva r = new Reserva(Reserva.generarCodigoReserva(), e.getCodigoUnico(), fecha, e.getTipoDeEspacio(), EstadoReserva.PENDIENTE, motivo, this.getCodigoUnico(), this.getCedula());
-      Sistema.reservas.add(r);
-      String rs = r.toString();
-      ManejoArchivos.EscribirArchivo("reservas.txt", rs);
-      enviarNotificacion(r, e);
+    System.out.println("Elija el codigo del espacio que desea reservar ");
+    String eleccion = sc.nextLine();
+    for (Espacio espacio: Sistema.espacios){
+      if(eleccion.equals(espacio.getCodigoUnico())){
+      System.out.println("Porque desea realizar la reserva?");
+      String motivo = sc.nextLine();
+      System.out.println("Desea reservar el espacio codigo " + espacio.getCodigoUnico() + " en la fecha " + fecha + "?");
+      System.out.println("1.- Si");
+      System.out.println("2.- No");
+      int desicion = sc.nextInt();
+      sc.nextLine();
+      if(desicion == 1){
+        Reserva r = new Reserva(Reserva.generarCodigoReserva(), espacio.getCodigoUnico(), fecha, espacio.getTipoDeEspacio(), EstadoReserva.PENDIENTE, motivo, this.getCodigoUnico(), this.getCedula());
+        Sistema.reservas.add(r);
+        String rs = r.toString();
+        manejoArchivos.EscribirArchivo("reservas.txt", rs);
+        enviarNotificacion(r, espacio);
+      }else{
+        System.out.println("Regresando al menu...");
+      }
     }
   }
-
+  }
+     // sc.close();
   /*
    * Este método permite al estudiante consultar una reserva que haya realizado previamente.
    * @param fecha es la fecha de la reserva a consultar.
    * @return no retorna valores, imprime en consola.
    */
-  public void consultarReserva(LocalDate fecha){
+  public void consultarReserva(){
+   // Scanner sc = new Scanner(System.in);
+        System.out.println("Cual es la fecha de la reserva que desea consultar? (AAAA-MM-DD)");
+        String fString = sc.nextLine();
+        LocalDate fecha = LocalDate.parse(fString);
     for (Reserva reserva: Sistema.reservas){
-          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUnico()==this.getCodigoUnico()){
+          if (reserva.getFechaReserva()==fecha && reserva.getCodigoUsuario().equals(this.getCodigoUnico())){
             System.out.println("Código de Reserva: "+reserva.getCodigoReserva());
             System.out.println("Fecha de Reserva: "+reserva.getFechaReserva());
             System.out.println("Tipo de Espacio: "+reserva.getTipoDeEspacio());
 
             for (Espacio espacio: Sistema.espacios){
-              if (espa.getCodigoUnico()==reserva.getCodigoUnicoEspacio()){
+              if (espacio.getCodigoUnico().equals(reserva.getCodigoUnicoEspacio())){
                 System.out.println("Nombre de Espacio"+espacio.getNombre());
-                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());  
+                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad()); 
+                System.out.println("Nombre de Espacio"+espacio.getNombre());
+                System.out.println("Capacidad de Espacio: "+espacio.getCapacidad()); 
               }
-            }
-            System.out.println("Nombre de Espacio"+espacio.getNombre());
-            System.out.println("Capacidad de Espacio: "+espacio.getCapacidad());
-              
+            } 
             for (Usuario usuario: Sistema.usuarios){
-                if (usu.getCodigoUnico==this.getCodigoUnico){
+                if (usuario.getCodigoUnico().equals(this.getCodigoUnico())){
                     System.out.println("Nombres y Apellidos: "+usuario.getNombres()+usuario.getApellidos());
                 }
             }
             System.out.println("Estado de reserva: "+reserva.getEstadoDeLaReserva());
-          }
-        }
-  }
+        }else{
+          System.out.println("Regresando al menu");
+        }}
+   //sc.close();
+}
 
   //setters
   public void setnumMatricula(int numMatricula){
@@ -120,4 +130,6 @@ public class Estudiante extends Usuario{
   }
 
 }
+  
+
   

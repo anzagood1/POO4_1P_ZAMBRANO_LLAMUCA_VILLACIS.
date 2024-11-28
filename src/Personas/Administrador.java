@@ -54,7 +54,7 @@ public class Administrador extends Usuario{
         }
     }
 
-        /**
+     /**
      * Método que permite al admnistrador aprobar o rechazar las reservas.
      */
     @Override
@@ -96,51 +96,42 @@ public class Administrador extends Usuario{
                     for(Espacio espacio: Sistema.espacios){
                         if(reserv.getCodigoUnicoEspacio().equals(espacio.getCodigoUnico())){
                             espacio.setEstado(EstadoEspacio.RESERVADO);
-                }
-            }
-            manejoArchivos.borrarArchivo("reservas.txt");
-            for(Reserva reservs: Sistema.reservas){
-                String rs = reservs.toString();
-                manejoArchivos.EscribirArchivo("espacios.txt", rs);
-            }
-            manejoArchivos.borrarArchivo("espacios.txt");
-            for(Espacio espacio: Sistema.espacios){
-                String es = espacio.toString();
-                manejoArchivos.EscribirArchivo("espacios.txt", es);
-            }
-            for(Usuario usuario: Sistema.usuarios){
-                if(reserv.getCodigoUsuario().equals(usuario.getCodigoUnico())){
-                    enviarNotificacion(reserv,usuario, reserv.getEstadoDeLaReserva());
-                }
-            }
-        } 
-    }else if(tipoEstado == EstadoReserva.RECHAZADO){
-            for(Reserva reserv: Sistema.reservas){
-                reserv.setEstadoDeLaReserva(EstadoReserva.RECHAZADO);
-                for(Espacio espacio: Sistema.espacios){
-                    if(reserv.getCodigoUnicoEspacio() == espacio.getCodigoUnico()){
-                        espacio.setEstado(EstadoEspacio.DISPONIBLE);
+                        }
+                    }
+                for(Usuario usuario: Sistema.usuarios){
+                    if(reserv.getCodigoUsuario().equals(usuario.getCodigoUnico())){
+                        enviarNotificacion(reserv,usuario, reserv.getEstadoDeLaReserva());
                     }
                 }
-            manejoArchivos.borrarArchivo("reservas.txt");
-                for(Reserva reservs: Sistema.reservas){
-                    String rs = reservs.toString();
-                    manejoArchivos.EscribirArchivo("espacios.txt", rs);
-                }
-                manejoArchivos.borrarArchivo("espacios.txt");
-                for(Espacio espacio: Sistema.espacios){
-                    String es = espacio.toString();
-                    manejoArchivos.EscribirArchivo("espacios.txt", es);
-                }
-                for(Usuario usuario: Sistema.usuarios){
-                    if(reserv.getCodigoUsuario() == usuario.getCodigoUnico()){
-                        enviarNotificacion(reserv,usuario, reserv.getEstadoDeLaReserva());
+            }  
+        }else if(tipoEstado == EstadoReserva.RECHAZADO){
+            for(Reserva reserv: Sistema.reservas){
+                if(reserv.getCodigoReserva() == eleccion){
+                    reserv.setEstadoDeLaReserva(EstadoReserva.RECHAZADO);
+                    for(Espacio espacio: Sistema.espacios){
+                        if(reserv.getCodigoUnicoEspacio() == espacio.getCodigoUnico()){
+                            espacio.setEstado(EstadoEspacio.DISPONIBLE);
+                        }
+                    }
+                    for(Usuario usuario: Sistema.usuarios){
+                        if(reserv.getCodigoUsuario() == usuario.getCodigoUnico()){
+                            enviarNotificacion(reserv,usuario, reserv.getEstadoDeLaReserva());
+                        }
                     }
                 }
             }
         }
+        manejoArchivos.borrarArchivo("reservas.txt");
+        for(Reserva reservs: Sistema.reservas){
+            String rs = reservs.toString();
+            manejoArchivos.EscribirArchivo("espacios.txt", rs);
+        }
+        manejoArchivos.borrarArchivo("espacios.txt");
+        for(Espacio espacio: Sistema.espacios){
+            String es = espacio.toString();
+            manejoArchivos.EscribirArchivo("espacios.txt", es);
+        }   
     }
-}
 
 
     //setter

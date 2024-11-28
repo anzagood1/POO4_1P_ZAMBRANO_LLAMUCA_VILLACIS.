@@ -143,7 +143,6 @@ public abstract class Usuario{
   public void enviarNotificacion(Reserva r, Usuario u, EstadoReserva er){
     String desicion;
     if(er == EstadoReserva.RECHAZADO){
-      Scanner sc = new Scanner(System.in);
       System.out.println("Cual es el motivo del rechazo? ");
       String motivo = sc.nextLine();
       desicion = "rechazado";
@@ -169,15 +168,16 @@ public abstract class Usuario{
     try {
         Message mes = new MimeMessage(sesion);
         mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
-        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(u.getCorreo()));
+        mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("svillacish@gmail.com"));
         mes.setSubject("ESTADO DE RESERVA: " + er);
-        mes.setText("De: " + this.getCorreo() + "\n" + "Se ha " + desicion + " su reserva con codigo " 
-        + r.getCodigoReserva() + " por el siguiente motivo: " + motivo);
+        mes.setText("De: " + this.getCorreo() + "\n \n" + "Se ha " + desicion + " su reserva con codigo " 
+        + r.getCodigoReserva() + " por el siguiente motivo: " + motivo + "\n \n" + "Atentamente," 
+        + "Departamento administrativo");
         Transport.send(mes);
     } catch (Exception e){
         System.out.println(e.getMessage());
     }
-    } else if(er == EstadoReserva.APROBADO){
+    }else if(er == EstadoReserva.APROBADO){
       desicion = "aprobado";
       Dotenv dot = Dotenv.load();
 
@@ -201,10 +201,10 @@ public abstract class Usuario{
       try {
           Message mes = new MimeMessage(sesion);
           mes.setFrom(new InternetAddress(user, "Reservas de Espacios"));
-          mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse(u.getCorreo()));
+          mes.setRecipients(Message.RecipientType.TO, InternetAddress.parse("svillacish@gmail.com"));
           mes.setSubject("ESTADO DE RESERVA: " + er);
-          mes.setText("De: " + this.getCorreo() + "\n" + "Se ha " + desicion + " su reserva con codigo " 
-          + r.getCodigoReserva());
+          mes.setText("De: " + this.getCorreo() + "\n \n" + "Se ha " + desicion + " su reserva con codigo " + 
+          r.getCodigoReserva() + "\n \n" +  "Atentamente," + "\n" + "Departamento administrativo");
           Transport.send(mes);
       } catch (Exception e){
         System.out.println(e.getMessage());

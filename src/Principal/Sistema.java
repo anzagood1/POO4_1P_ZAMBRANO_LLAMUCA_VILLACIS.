@@ -120,9 +120,9 @@ public class Sistema {
      * @return retorna null si no encuentra ningún usuario coincidente.
      */
     public static Usuario iniciarSesion(){
-        System.out.println("Usuario: ");
+        System.out.print("Usuario: ");
         String user = sc.nextLine();
-        System.out.println("Contrasenia: ");
+        System.out.print("Contrasenia: ");
         String contrasenia = sc.nextLine();
         for(Usuario usuario : usuarios){
             if (usuario.getUsuario().equalsIgnoreCase(user) && usuario.getContrasenia().equals(contrasenia)){
@@ -146,9 +146,11 @@ public class Sistema {
                     System.out.println("3. Cerrar sesion");
                     opcion = sc.nextLine();
                     if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
-                    e.gestionarReserva();
+                        e.gestionarReserva();
                     }else if(opcion.equalsIgnoreCase("Consultar Reserva") || Integer.parseInt(opcion) == 2){
-                    e.consultarReserva();
+                        e.consultarReserva();
+                    }else if(opcion.equalsIgnoreCase("Cerrar sesion") || Integer.parseInt(opcion) == 3){
+                        System.out.println("Cerrando sesion...");
                     }
                 } while (!opcion.equalsIgnoreCase("Cerrar sesion") && Integer.parseInt(opcion) != 3);
                 
@@ -160,10 +162,12 @@ public class Sistema {
                     System.out.println("2. Consultar Reserva");
                     System.out.println("3. Cerrar sesion");
                     opcion = sc.nextLine();
-                    if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
+                        if (opcion.equalsIgnoreCase("Reservar") || Integer.parseInt(opcion) == 1){
                     p.gestionarReserva();
                     }else if(opcion.equalsIgnoreCase("Consultar Reserva") || Integer.parseInt(opcion) == 2){
-                    p.consultarReserva();
+                        p.consultarReserva();
+                    }else if(opcion.equalsIgnoreCase("Cerrar sesion") || Integer.parseInt(opcion) == 3){
+                        System.out.println("Cerrando sesion...");
                     }
                 } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
                 
@@ -179,6 +183,8 @@ public class Sistema {
                         a.gestionarReserva();
                     }else if(opcion.equalsIgnoreCase("Consultar reserva") || Integer.parseInt(opcion) == 2){
                         a.consultarReserva();
+                    }else if(opcion.equalsIgnoreCase("Cerrar sesion") || Integer.parseInt(opcion) == 3){
+                        System.out.println("Cerrando sesion...");
                     }
                 } while (opcion != "Cerrar sesion" && Integer.parseInt(opcion) != 3);
             }
@@ -190,17 +196,18 @@ public class Sistema {
            cargarUsuarios("usuarios.txt", "estudiantes.txt", "profesores.txt", "administradores.txt");
            cargarEspacios("espacios.txt");
            cargarReservas("reservas.txt");
-           System.out.println(usuarios.size());
-           System.out.println(reservas.size());
-           System.out.println(espacios.size());
            
            Usuario usuario = iniciarSesion();
+           int i = 0;
+           while(i == 0){
            if (usuario == null){
             System.out.println("Usuario o contraseña incorrectos");
             usuario = iniciarSesion();
            }else{  
              mostrarMenu(usuario);
+             i++;
            }
+        }
         }
     }
 
